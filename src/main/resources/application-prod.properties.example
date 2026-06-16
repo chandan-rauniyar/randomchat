@@ -1,0 +1,35 @@
+# PRODUCTION
+#Use Your details
+
+# PostgreSQL
+spring.datasource.url=${DB_URL}
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD}
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# Neon pooler requires larger pool (pooler handles actual DB connections)
+spring.datasource.hikari.pool-name=RandomChatProdPool
+spring.datasource.hikari.maximum-pool-size=20
+spring.datasource.hikari.minimum-idle=5
+spring.datasource.hikari.connection-timeout=30000
+spring.datasource.hikari.idle-timeout=600000
+spring.datasource.hikari.max-lifetime=1800000
+
+# Redis (ElastiCache or self-hosted)
+spring.data.redis.host=${REDIS_HOST:localhost}
+spring.data.redis.port=${REDIS_PORT:6379}
+spring.data.redis.password=${REDIS_PASSWORD:}
+spring.data.redis.timeout=2000ms
+spring.data.redis.lettuce.pool.max-active=10
+spring.data.redis.lettuce.pool.min-idle=2
+
+# JWT
+app.jwt.secret=${JWT_SECRET}
+app.jwt.expiry-days=30
+
+# Logging
+logging.level.root=WARN
+logging.level.com.chandan.randomchat=INFO
+
+# Actuator
+management.endpoint.health.show-details=always

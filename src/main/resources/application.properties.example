@@ -1,0 +1,28 @@
+spring.application.name=randomchat
+
+# Active profile
+spring.profiles.active=${SPRING_PROFILE:dev}
+
+# Flyway
+spring.flyway.enabled=true
+spring.flyway.locations=classpath:db/migration
+spring.flyway.baseline-on-migrate=false
+
+# JPA
+spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.open-in-view=false
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.format_sql=true
+
+# Actuator
+management.endpoints.web.exposure.include=health,info
+management.endpoint.health.show-details=when_authorized
+
+# Jackson
+spring.jackson.serialization.write-dates-as-timestamps=false
+spring.jackson.time-zone=UTC
+
+#security
+
+spring.security.user.name=ADD YOUR USERNAME
+spring.security.user.password=ADD PASSWORD

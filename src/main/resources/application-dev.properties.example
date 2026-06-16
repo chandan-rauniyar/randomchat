@@ -1,0 +1,33 @@
+# LOCAL DEV
+# Note change you details as needed
+
+# PostgreSQL
+spring.datasource.url=jdbc:postgresql://localhost:5434/randomchat_dev
+spring.datasource.username=YOUR DB USERNAME
+spring.datasource.password=YOUR DB PASSWORD
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# Connection pool
+spring.datasource.hikari.pool-name=RandomChatPool
+spring.datasource.hikari.maximum-pool-size=5
+spring.datasource.hikari.minimum-idle=2
+spring.datasource.hikari.connection-timeout=30000
+
+# Redis (Docker container)
+spring.data.redis.host=localhost
+spring.data.redis.port=6380
+spring.data.redis.password=
+spring.data.redis.timeout=2000ms
+
+# JWT
+app.jwt.secret= SET YOU JWT SECRET MIN 32 BIT
+app.jwt.expiry-days=30
+
+# Logging
+logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.orm.jdbc.bind=TRACE
+logging.level.com.chandan.randomchat=DEBUG
+logging.level.org.springframework.security=DEBUG
+
+# DevTools: fast restart
+spring.devtools.restart.enabled=true
