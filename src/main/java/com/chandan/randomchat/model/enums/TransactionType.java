@@ -1,0 +1,24 @@
+package com.chandan.randomchat.model.enums;
+
+public enum TransactionType {
+    SIGNUP_BONUS,
+    AD_REWARD,
+    AD_REWARD_DAILY_BONUS,
+    PURCHASE,
+    ADMIN_GRANT,
+
+    ADMIN_DEDUCT,
+
+
+    MATCH_CREDIT_PURCHASE,
+    GENDER_FILTER_PURCHASE,
+    COUNTRY_FILTER_PURCHASE,
+    BUNDLE_FILTER_PURCHASE,
+
+    MATCH_DEDUCT,
+    GENDER_FILTER_DEDUCT,
+    COUNTRY_FILTER_DEDUCT
+}
+
+
+
