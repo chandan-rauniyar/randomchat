@@ -3,6 +3,8 @@ package com.chandan.randomchat.model;
 import com.chandan.randomchat.model.enums.GenderType;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -27,10 +29,17 @@ import java.util.UUID;
 @ToString(exclude = "user")
 public class OnlineUser {
 
+    @Id
+    @Column(name = "user_id", nullable = false)
+    private UUID userId;
+
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
-    @JoinColumn(name = "user_id", referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_online_users_user"))
+    @JoinColumn(
+            name = "user_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_online_users_user")
+    )
     private User user;
 
     @Column(name = "app_id", nullable = false, length = 50)
@@ -41,14 +50,16 @@ public class OnlineUser {
     private Instant lastHeartbeat = Instant.now();
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender", length = 10)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "gender", length = 10, columnDefinition = "gender_type")
     private GenderType gender;
 
     @Column(name = "country_code", length = 5)
     private String countryCode;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "active_gender_filter", length = 10)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "active_gender_filter", length = 10, columnDefinition = "gender_type")
     private GenderType activeGenderFilter;
 
     @Column(name = "active_country_filter", length = 5)
@@ -67,15 +78,6 @@ public class OnlineUser {
 
     @Column(name = "fcm_token", length = 255)
     private String fcmToken;
-
-    public void syncFromUser(User u) {
-        this.appId               = u.getAppId();
-        this.gender              = u.getGender();
-        this.countryCode         = u.getCountryCode();
-        this.activeGenderFilter  = u.getActiveGenderFilter();
-        this.activeCountryFilter = u.getActiveCountryFilter();
-        this.lastHeartbeat       = Instant.now();
-    }
 
     public void enterQueue() {
         this.isInQueue = true;

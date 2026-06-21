@@ -4,6 +4,8 @@ import com.chandan.randomchat.model.enums.PurchaseStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -68,7 +70,8 @@ public class Purchase {
     private BigDecimal amountUsd;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, length = 20)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "status", nullable = false, length = 20, columnDefinition = "status")
     @Builder.Default
     private PurchaseStatus status = PurchaseStatus.PENDING;
 

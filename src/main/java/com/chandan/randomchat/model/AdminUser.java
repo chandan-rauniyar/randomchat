@@ -4,7 +4,9 @@ import com.chandan.randomchat.model.enums.AdminRole;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.util.List;
@@ -40,8 +42,9 @@ public class AdminUser {
     @Column(name = "email", length = 200, unique = true)
     private String email;
 
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false, length = 20)
+    @Column(name = "role", nullable = false, length = 20,columnDefinition = "role")
     @Builder.Default
     private AdminRole role = AdminRole.MODERATOR;
 

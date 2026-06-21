@@ -5,6 +5,8 @@ import com.chandan.randomchat.model.enums.BanType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -45,11 +47,13 @@ public class Ban {
     private User user;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "ban_type", nullable = false, length = 20)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "ban_type", nullable = false, length = 20, columnDefinition = "ban_type")
     private BanType banType;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "ban_source", nullable = false, length = 20)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "ban_source", nullable = false, length = 20, columnDefinition = "ban_source")
     @Builder.Default
     private BanSource banSource = BanSource.ADMIN;
 

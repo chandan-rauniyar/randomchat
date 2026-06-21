@@ -4,7 +4,9 @@ import com.chandan.randomchat.model.enums.GenderType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.util.List;
@@ -49,7 +51,8 @@ public class User {
     private String username;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender", length = 10)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "gender", length = 10, columnDefinition = "gender")
     private GenderType gender;
 
     @Column(name = "country_code", length = 5)
@@ -72,7 +75,8 @@ public class User {
     private Integer filterCreditsCountry = 0;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "active_gender_filter", length = 10)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "active_gender_filter", length = 10, columnDefinition = "active_gender_filter")
     private GenderType activeGenderFilter;
 
     @Column(name = "active_country_filter", length = 5)

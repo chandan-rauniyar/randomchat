@@ -4,6 +4,8 @@ import com.chandan.randomchat.model.enums.AdType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -45,8 +47,9 @@ public class AdView {
     )
     private User user;
 
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Enumerated(EnumType.STRING)
-    @Column(name = "ad_type", nullable = false, length = 20)
+    @Column(name = "ad_type", nullable = false, length = 20, columnDefinition = "ad_type")
     @Builder.Default
     private AdType adType = AdType.REWARDED;
 

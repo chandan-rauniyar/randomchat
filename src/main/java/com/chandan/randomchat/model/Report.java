@@ -5,6 +5,8 @@ import com.chandan.randomchat.model.enums.ReportStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -64,14 +66,16 @@ public class Report {
     private Session session;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "reason", nullable = false, length = 50)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "reason", nullable = false, length = 50, columnDefinition = "reason")
     private ReportReason reason;
 
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, length = 20)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "status", nullable = false, length = 20, columnDefinition = "status")
     @Builder.Default
     private ReportStatus status = ReportStatus.PENDING;
 

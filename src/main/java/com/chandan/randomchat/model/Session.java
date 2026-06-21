@@ -5,6 +5,8 @@ import com.chandan.randomchat.model.enums.SessionEndReason;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.util.List;
@@ -57,14 +59,16 @@ public class Session {
     private User user2;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "user1_gender_filter", length = 10)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "user1_gender_filter", length = 10, columnDefinition = "user1_gender_filter")
     private GenderType user1GenderFilter;
 
     @Column(name = "user1_country_filter", length = 5)
     private String user1CountryFilter;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "user2_gender_filter", length = 10)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "user2_gender_filter", length = 10, columnDefinition = "user2_gender_filter")
     private GenderType user2GenderFilter;
 
     @Column(name = "user2_country_filter", length = 5)
@@ -81,7 +85,8 @@ public class Session {
     private Integer durationSec;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "end_reason", length = 30)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "end_reason", length = 30, columnDefinition = "end_reason")
     private SessionEndReason endReason;
 
     @Column(name = "was_reported", nullable = false)

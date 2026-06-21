@@ -4,6 +4,8 @@ import com.chandan.randomchat.model.enums.TransactionType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -45,7 +47,8 @@ public class CoinTransaction {
     private User user;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "transaction_type", nullable = false, length = 40)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "transaction_type", nullable = false, length = 40, columnDefinition = "transaction_type")
     private TransactionType transactionType;
 
     @Column(name = "coin_amount", nullable = false)
